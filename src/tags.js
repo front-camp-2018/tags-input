@@ -9,6 +9,7 @@ class tagsApp {
   constructor($tagsInput,$tagsList,defaultTags){
     this.$tagsInput = $tagsInput;
     this.$tagsList = $tagsList;
+    
     if(!defaultTags) this.tagsArr=[];
     else this.tagsArr=[...defaultTags];
 
@@ -21,9 +22,9 @@ class tagsApp {
     this.$tagsInput.addEventListener('keyup', ({key, target}) => {
       this.$tagsInput.style.outline='none';
       if (key === 'Enter' && target.value.trim()) {
-        const $el = this[_createTagElement](target.value);
         const isElementExist = this.tagsArr.includes(target.value.trim());
         if (!isElementExist) {
+          const $el = this[_createTagElement](target.value);
           this.$tagsList.appendChild($el);
           this.tagsArr.push(target.value.trim());
           target.value = '';
@@ -37,12 +38,13 @@ class tagsApp {
     this.$tagsList.addEventListener('click', event => {
       const {target} = event;
       const isRemoveBtn = target.classList.contains('remove-btn');
-      const $foo = target.parentElement.parentElement;
-      const $tag = target.parentElement;
-    
       if (isRemoveBtn) {
-        $foo.removeChild($tag);
-        this.tagsArr.splice(this.tagsArr.indexOf( $tag.children[0].textContent),1);
+        const $tag = target.parentElement;
+        this.$tagsList.removeChild($tag);
+        this.tagsArr.splice(
+          this.tagsArr.indexOf( $tag.children[0].textContent),
+          1
+        );
       }
     });
   }

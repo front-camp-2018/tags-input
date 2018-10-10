@@ -7,5 +7,5 @@ new tagsApp(
 new tagsApp(
   document.getElementById('default-tags-input'),
   document.getElementById('default-tags-list'),
-  ['1', 'super tag']
+  ['myTag', '1','tag that containts a lot of text']
 );
