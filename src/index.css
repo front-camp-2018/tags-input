@@ -19,26 +19,39 @@ ul {
   color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
 }
 
 .title-level-1 {
-  margin-bottom: 25px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+#app > .input-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .title-level-2 {
   margin-bottom: 15px;
 }
 
-#tags-input {
+.tags-input {
   height: 40px;
   font-size: 24px;
   padding: 0 10px;
   margin-bottom: 20px;
 }
 
-#tags-list {
+.invalid-value {
+  border: 2px solid red;
+  outline: none;
+}
+
+.tags-list {
   list-style: none;
   display: flex;
   align-items: center;
