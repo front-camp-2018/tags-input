@@ -24,26 +24,30 @@ ul {
 }
 
 .title-level-1 {
-  margin-bottom: 25px;
+  margin-bottom: 40px;
+  color:#EDEEEF;
 }
 
 .title-level-2 {
   margin-bottom: 15px;
+  color:#EDEEEF;
 }
 
-#tags-input {
+.tags-input {
   height: 40px;
   font-size: 24px;
   padding: 0 10px;
   margin-bottom: 20px;
 }
 
-#tags-list {
+.tags-list {
   list-style: none;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  min-height: 30px;
+  padding-bottom: 20px;
 }
 
 .tags-list-item {
@@ -53,7 +57,7 @@ ul {
   margin: 10px;
   align-items: center;
   background: #5c656e;
-  color: white;
+  color: #EDEEEF;
   border-radius: 5%;
 }
 
