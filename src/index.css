@@ -24,21 +24,37 @@ ul {
 }
 
 .title-level-1 {
-  margin-bottom: 25px;
+  margin-bottom: 40px;
 }
 
 .title-level-2 {
   margin-bottom: 15px;
 }
 
-#tags-input {
+#tag-input-1 {
   height: 40px;
   font-size: 24px;
-  padding: 0 10px;
+  padding: 0 5px;
   margin-bottom: 20px;
 }
 
-#tags-list {
+#tag-input-2 {
+  height: 40px;
+  font-size: 24px;
+  padding: 0 5px;
+  margin-bottom: 20px;
+}
+
+#tag-list-1 {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+#tag-list-2 {
   list-style: none;
   display: flex;
   align-items: center;
@@ -50,11 +66,11 @@ ul {
   height: 30px;
   display: flex;
   padding: 0 8px;
-  margin: 10px;
+  margin: 4px;
   align-items: center;
   background: #5c656e;
   color: white;
-  border-radius: 5%;
+  border-radius: 4%;
 }
 
 .tag-name {
@@ -66,4 +82,95 @@ ul {
   padding-left: 8px;
   border-left: 1px solid #363d48;
   cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  margin: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fefefe;
+  margin: 100px 350px 100px;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  padding: 2px 25px;
+  color: white;
+  background: #2d353c;
+}
+
+#myBtn {
+  display: inline-block;
+  padding: 15px 25px;
+  margin: 300px 590px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+#myBtn:hover {
+  background-color: #3e8e41;
+}
+
+#myBtn:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
