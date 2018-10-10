@@ -1,35 +1,52 @@
 'use strict';
 
-const $tagsInput = document.getElementById('tags-input');
-const $tagsList = document.getElementById('tags-list');
-const tagsArr = ['1', 'super tag'];
+const $tagsInputDefault = document.getElementById('tags-input-1');
+const $tagsListDefault = document.getElementById('tags-list-1');
+const tagsArrDefault = ['1', 'super tag'];
 
-$tagsInput.addEventListener('keyup', ({key, target}) => {
-  if (key === 'Enter' && target.value.trim()) {
-    const $el = createTagElement(target.value);
-    const isElementExist = tagsArr.includes(target.value);
+const $tagsInput = document.getElementById('tags-input-2');
+const $tagsList = document.getElementById('tags-list-2');
+const tagsArr = [];
 
-    if (!isElementExist) {
-      $tagsList.appendChild($el);
-      tagsArr.push(target.value);
-      target.value = '';
+
+const addTagToList = (input, list, arr) => {
+  input.addEventListener('keyup', ({key, target}) => {
+    if (key === 'Enter' && target.value.trim()) {
+      const $el = createTagElement(target.value);
+      const isElementExist = arr.includes(target.value);
+
+      if (!isElementExist) {
+        list.appendChild($el);
+        arr.push(target.value);
+        target.value = '';
+      }
+      else {
+        alert('Такий тег вже існує');
+        target.value = '';
+      }
     }
-  }
-});
+  });
+};
 
-$tagsList.addEventListener('click', event => {
-  const {target} = event;
-  const isRemoveBtn = target.classList.contains('remove-btn');
-  const $foo = target.parentElement.parentElement;
-  const $tag = target.parentElement;
+addTagToList($tagsInputDefault, $tagsListDefault,tagsArrDefault);
+addTagToList($tagsInput,$tagsList,tagsArr);
 
-  if (isRemoveBtn) {
-    $foo.removeChild($tag);
+const removeEventListener =(tag, arr) => {
+  tag.addEventListener('click', event => {
+    const {target} = event;
+    const isRemoveBtn = target.classList.contains('remove-btn');
+    const $doubleParent = target.parentElement.parentElement;
+    const $tag = target.parentElement;
 
-    // TODO: remove element from array
-    // tagsArr.splice();
-  }
-});
+    if (isRemoveBtn) {
+      $doubleParent.removeChild($tag);
+      arr.splice(arr.indexOf($tag.firstElementChild.innerHTML));
+    }
+  });
+};
+
+removeEventListener($tagsList,tagsArr);
+removeEventListener($tagsListDefault,tagsArrDefault);
 
 const createTagElement = content => {
   const $li = document.createElement('li');
@@ -44,10 +61,10 @@ const createTagElement = content => {
 };
 
 const init = () => {
-  tagsArr.forEach(tagValue => {
+  tagsArrDefault.forEach(tagValue => {
     const $el = createTagElement(tagValue);
 
-    $tagsList.appendChild($el);
+    $tagsListDefault.appendChild($el);
   });
 };
 
