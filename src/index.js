@@ -33,17 +33,18 @@ const addTagElement = (event, tagsArray, tagsList) => {
   }
 };
 
-const removeTagElement = event => {
+const removeTagElement = (event, tagsArray) => {
   const {target} = event;
   const isRemoveBtn = target.classList.contains('remove-btn');
   const $listItem = target.parentElement.parentElement;
   const $tag = target.parentElement;
+  const titleTag = $tag.querySelector('.tag-name').innerText;
+  const titleTagIndex = tagsArray.indexOf(titleTag);
 
   if (isRemoveBtn) {
     $listItem.removeChild($tag);
 
-    // TODO: remove element from array
-    // defaultTags.splice();
+    tagsArray.splice(titleTagIndex, 1);
   }
 };
 
@@ -52,7 +53,7 @@ $simpletTagsInput.addEventListener('keyup', event => {
 });
 
 $simpleTagsList.addEventListener('click', event => {
-  removeTagElement(event);
+  removeTagElement(event, simpleTags);
 });
 
 $defaultTagsInput.addEventListener('keyup', event => {
@@ -60,7 +61,7 @@ $defaultTagsInput.addEventListener('keyup', event => {
 });
 
 $defaultTagsList.addEventListener('click', event => {
-  removeTagElement(event);
+  removeTagElement(event, defaultTags);
 });
 
 const init = () => {
