@@ -1,32 +1,66 @@
 'use strict';
 
-const $tagsInput = document.getElementById('tags-input');
-const $tagsList = document.getElementById('tags-list');
-const tagsArr = ['1', 'super tag'];
+const $tagsInputFirst = document.getElementById('tags-input-1');
+const $tagsInputSecond = document.getElementById('tags-input-2');
+const $tagsList = document.getElementsByClassName('tags-list');
+const tagsArrFirst = [];
+const tagsArrSecond = ['tag1', 'some awesome tag'];
 
-$tagsInput.addEventListener('keyup', ({key, target}) => {
+$tagsInputFirst.addEventListener('keyup', ({key, target}) => {
   if (key === 'Enter' && target.value.trim()) {
     const $el = createTagElement(target.value);
-    const isElementExist = tagsArr.includes(target.value);
+    const isElementExist = tagsArrFirst.includes(target.value);
+
     if (!isElementExist) {
-      $tagsList.appendChild($el);
-      tagsArr.push(target.value);
+      $tagsList[0].appendChild($el);
+      tagsArrFirst.push(target.value);
       target.value = '';
     }
   }
 });
 
-$tagsList.addEventListener('click', event => {
+$tagsInputSecond.addEventListener('keyup', ({key, target}) => {
+  if (key === 'Enter' && target.value.trim()) {
+    const $el = createTagElement(target.value);
+    const isElementExist = tagsArrSecond.includes(target.value);
+
+    if (!isElementExist) {
+      $tagsList[1].appendChild($el);
+      tagsArrSecond.push(target.value);
+      target.value = '';
+    }
+  }
+});
+
+
+
+$tagsList[0].addEventListener('click', event => {
   const {target} = event;
   const isRemoveBtn = target.classList.contains('remove-btn');
   const $foo = target.parentElement.parentElement;
   const $tag = target.parentElement;
-  const indexOfItem = tagsArr.indexOf(target.value);
+  const indexOfItem = tagsArrFirst.indexOf(target.value);
+
   if (isRemoveBtn) {
     $foo.removeChild($tag);
-    tagsArr.splice(indexOfItem,1);
+    tagsArrFirst.splice(indexOfItem,1);
   }
 });
+
+$tagsList[1].addEventListener('click', event => {
+  const {target} = event;
+  const isRemoveBtn = target.classList.contains('remove-btn');
+  const $foo = target.parentElement.parentElement;
+  const $tag = target.parentElement;
+  const indexOfItem = tagsArrSecond.indexOf(target.value);
+
+  if (isRemoveBtn) {
+    $foo.removeChild($tag);
+    tagsArrSecond.splice(indexOfItem,1);
+  }
+});
+
+
 
 const createTagElement = content => {
   const $li = document.createElement('li');
@@ -40,12 +74,13 @@ const createTagElement = content => {
   return $li;
 };
 
-const init = () => {
-  tagsArr.forEach(tagValue => {
+const init = ($tag, arr) => {
+  arr.forEach(tagValue => {
     const $el = createTagElement(tagValue);
 
-    $tagsList.appendChild($el);
+    $tag.appendChild($el);
   });
 };
 
-init();
+init($tagsList[0], tagsArrFirst);
+init($tagsList[1], tagsArrSecond);
