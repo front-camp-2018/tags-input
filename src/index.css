@@ -13,7 +13,7 @@ ul {
   padding: 0;
 }
 
-#app {
+.app {
   height: 100%;
   background: #2d353c;
   color: white;
@@ -23,22 +23,24 @@ ul {
   flex-direction: column;
 }
 
-.title-level-1 {
+.title {
   margin-bottom: 25px;
 }
 
-.title-level-2 {
-  margin-bottom: 15px;
+.title-input {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 16px auto;
 }
 
-#tags-input {
+.tags-input {
   height: 40px;
   font-size: 24px;
   padding: 0 10px;
   margin-bottom: 20px;
 }
 
-#tags-list {
+.tags-list {
   list-style: none;
   display: flex;
   align-items: center;
