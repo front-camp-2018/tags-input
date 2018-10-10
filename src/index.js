@@ -1,35 +1,131 @@
 'use strict';
 
-const $tagsInput = document.getElementById('tags-input');
-const $tagsList = document.getElementById('tags-list');
-const tagsArr = ['1', 'super tag'];
+const $app = document.getElementById('app');
+const $tagsList = document.getElementById('initial-list');
+const defaultTags = ['tag1','some awesome tag'];
+var simpleInputTags = [];
+var inputTagsWithDefaul = defaultTags.slice();
 
-$tagsInput.addEventListener('keyup', ({key, target}) => {
-  if (key === 'Enter' && target.value.trim()) {
-    const $el = createTagElement(target.value);
-    const isElementExist = tagsArr.includes(target.value);
-
-    if (!isElementExist) {
-      $tagsList.appendChild($el);
-      tagsArr.push(target.value);
-      target.value = '';
-    }
-  }
-});
-
-$tagsList.addEventListener('click', event => {
-  const {target} = event;
+$app.addEventListener('click', ({target}) => {
   const isRemoveBtn = target.classList.contains('remove-btn');
-  const $foo = target.parentElement.parentElement;
-  const $tag = target.parentElement;
 
   if (isRemoveBtn) {
-    $foo.removeChild($tag);
+    const $foo = target.parentElement.parentElement;
+    const $tag = target.parentElement;
+      if (confirm('Are you sure want to delete this super tag?')) {
+        var tag = '';
+        const isSimpleInputTags = checkIsSimpleInputTags($foo);
 
-    // TODO: remove element from array
-    // tagsArr.splice();
+        $tag.childNodes.forEach(node => {
+          if(node.classList && node.classList.contains('tag-name')){
+            tag = node.innerText;
+
+            return false;
+          }
+        });
+
+        if(isSimpleInputTags){
+          simpleInputTags.splice(simpleInputTags.indexOf(tag), 1);
+
+        }else{
+          inputTagsWithDefaul.splice(inputTagsWithDefaul.indexOf(tag), 1);
+        }
+
+        taggeleErrorMessage($foo.parentElement.childNodes, 'none');
+        $foo.removeChild($tag);
+      } else {
+        return;
+      }
+  } else if(target.classList.contains('reset-to-default-btn')) {
+    const $children = target.parentElement.childNodes;
+    $children.forEach(child => {
+      if(child.classList && child.classList.contains('tags-wrapper')){
+        child.childNodes.forEach(tagWrapper => {
+          if(tagWrapper.classList && tagWrapper.classList.contains('tags-list')){
+            tagWrapper.innerHTML = '';
+            simpleInputTags = [];
+            if(tagWrapper.id === 'initial-list'){
+              init();
+
+              inputTagsWithDefaul = defaultTags.slice();
+
+              clearInputsAndErrors();
+            }
+          }
+        });
+      }
+    });
+  } else if(target.classList.contains('clear-btn')){
+    taggeleErrorMessage(target.parentElement.parentElement.childNodes, 'none');
+
+      target.parentElement.childNodes.forEach(node => {
+        if(node.classList && node.classList.contains('tags-input')){
+          node.value= '';
+        }
+      });
   }
 });
+
+$app.addEventListener('keyup', ({key, target}) => {
+  if (key === 'Enter' && target.classList.contains('tags-input') && target.value.trim()) {
+    const $el = createTagElement(target.value);
+    const $children = target.parentElement.parentElement.childNodes;
+    var isElementExist = false;
+
+    $children.forEach(child => {
+      if(child.classList && child.classList.contains('tags-list')) {
+        const isSimpleInputTags = checkIsSimpleInputTags(child);
+        const isValid = validate(isSimpleInputTags, target.value);
+
+        if(isValid){
+          if(isSimpleInputTags){
+            simpleInputTags.push(target.value);
+          }else{
+            inputTagsWithDefaul.push(target.value);
+          }
+
+          taggeleErrorMessage(target.parentElement.parentElement.childNodes, 'none');
+
+          child.appendChild($el);
+          target.value = '';
+        } else {
+          taggeleErrorMessage(target.parentElement.parentElement.childNodes, 'block');
+        }
+      }
+    });
+  }
+});
+
+const taggeleErrorMessage = (nodes, display) => {
+  nodes.forEach(node => {
+    if(node.classList && node.classList.contains('error-message')){
+      if(node.style.display !== display){
+        node.style.display = display;
+      }
+    }
+  });
+}
+
+const clearInputsAndErrors = () => {
+  const $tagsInput = document.getElementsByClassName('tags-input');
+  for (var i = 0; i < $tagsInput.length; i++) {
+    $tagsInput[i].value = '';
+  }
+
+  const $errorMessage = document.getElementsByClassName('error-message');
+  for (var i = 0; i < $errorMessage.length; i++) {
+    $errorMessage[i].style.display = 'none';
+  }
+}
+
+const checkIsSimpleInputTags = (child) => {
+  return child.id === 'initial-list' ? false : true;
+}
+const validate = (isSimpleInputTags, value) => {
+  return isSimpleInputTags
+    ? !simpleInputTags.includes(value)
+    : !inputTagsWithDefaul.includes(value);
+}
 
 const createTagElement = content => {
   const $li = document.createElement('li');
@@ -44,11 +140,11 @@ const createTagElement = content => {
 };
 
 const init = () => {
-  tagsArr.forEach(tagValue => {
-    const $el = createTagElement(tagValue);
+      defaultTags.forEach(tagValue => {
+        const $el = createTagElement(tagValue);
 
-    $tagsList.appendChild($el);
-  });
-};
+        $tagsList.appendChild($el);
+      });
+}
 
 init();

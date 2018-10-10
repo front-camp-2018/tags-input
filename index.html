@@ -11,9 +11,29 @@
 <body>
   <main id="app">
     <h1 class="title-level-1">Tags Input App</h1>
-    <h2 class="title-level-2">Simple Input</h2>
-    <input id="tags-input" type="text" placeholder="type your tags..." />
-    <ul id="tags-list"></ul>
+    <div class="simple-input-title-wrapper">
+        <h2 class="title-level-2">Simple Input</h2>
+        <span class="asterisk" tooltip="Input value should be less then 20 char">*</span>
+    </div>
+    <div class="tags-wrapper">
+      <div class="input-wrapper">
+          <input class="tags-input" type="text" maxlength="20" placeholder="type your tags..." />
+          <span class="clear-btn">X</span>
+      </div>
+      <span class="error-message">This tag already exist.</span>
+      <ul class="tags-list"></ul>
+    </div>
+
+    <h2 class="title-level-2">Input with default tags</h2>
+    <div class="tags-wrapper">
+      <div class="input-wrapper">
+          <input class="tags-input" type="text" placeholder="type your tags..." />
+          <span class="clear-btn">X</span>
+      </div>
+      <span class="error-message">This tag already exist.</span>
+      <ul id="initial-list" class="tags-list"></ul>
+    </div>
+    <button class="reset-to-default-btn">Reset to defaults</button>
   </main>
   <script src="src/index.js"></script>
 </body>

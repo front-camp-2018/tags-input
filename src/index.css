@@ -23,22 +23,26 @@ ul {
   flex-direction: column;
 }
 
+.tags-wrapper {
+  display: contents;
+}
 .title-level-1 {
   margin-bottom: 25px;
 }
 
 .title-level-2 {
   margin-bottom: 15px;
+  margin-top: 25px;
 }
 
-#tags-input {
+.tags-input {
   height: 40px;
   font-size: 24px;
   padding: 0 10px;
   margin-bottom: 20px;
 }
 
-#tags-list {
+.tags-list {
   list-style: none;
   display: flex;
   align-items: center;
@@ -67,3 +71,62 @@ ul {
   border-left: 1px solid #363d48;
   cursor: pointer;
 }
+
+.remove-btn:hover {
+  color: darkred;
+}
+
+.reset-to-default-btn {
+  width: 315px;
+  height: 42px;
+  margin-top: 25px;
+  font-size: 24px;
+  color: #363d48;
+}
+.error-message {
+  color: red;
+  display: none;
+}
+
+[tooltip]:before {
+  position : absolute;
+   content : attr(tooltip);
+   opacity : 0;
+   left: 10px;
+   width: 250px;
+}
+[tooltip]:hover:before {
+  opacity : 1;
+}
+[tooltip]:not([tooltip-persistent]):before {
+  pointer-events: none;
+}
+.simple-input-title-wrapper {
+  position: relative;
+}
+.asterisk {
+  position: absolute;
+  color: palegreen;
+  top:25px;
+  right: -10px;
+  cursor: pointer;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.clear-btn {
+  position: absolute;
+  top: 9px;
+  right: 10px;
+  font-size: 25px;
+  color: slategray;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  font-size: 27px;
+  top: 8px;
+}
+
