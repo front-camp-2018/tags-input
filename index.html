@@ -9,11 +9,24 @@
   <link rel="stylesheet" href="./src/index.css">
 </head>
 <body>
-  <main id="app">
+  <main class="app">
     <h1 class="title-level-1">Tags Input App</h1>
-    <h2 class="title-level-2">Simple Input</h2>
-    <input id="tags-input" type="text" placeholder="type your tags..." />
-    <ul id="tags-list"></ul>
+    <div class="list">
+      <h2 class="title-level-2">Simple Input</h2>
+      <input id="tags-input"
+             class="tags-input"
+             type="text"
+             placeholder="type your tags..." />
+      <ul class="tags-list"></ul>
+    </div>
+    <div class="list">
+      <h2 class="title-level-2">Default Input</h2>
+      <input id="default-tags-input"
+             class="tags-input"
+             type="text"
+             placeholder="type your tags..." />
+      <ul class="tags-list default-tags-list"></ul>
+    </div>
   </main>
   <script src="src/index.js"></script>
 </body>
