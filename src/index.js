@@ -8,7 +8,6 @@ $tagsInput.addEventListener('keyup', ({key, target}) => {
   if (key === 'Enter' && target.value.trim()) {
     const $el = createTagElement(target.value);
     const isElementExist = tagsArr.includes(target.value);
-
     if (!isElementExist) {
       $tagsList.appendChild($el);
       tagsArr.push(target.value);
@@ -22,12 +21,10 @@ $tagsList.addEventListener('click', event => {
   const isRemoveBtn = target.classList.contains('remove-btn');
   const $foo = target.parentElement.parentElement;
   const $tag = target.parentElement;
-
+  const indexOfItem = tagsArr.indexOf(target.value);
   if (isRemoveBtn) {
     $foo.removeChild($tag);
-
-    // TODO: remove element from array
-    // tagsArr.splice();
+    tagsArr.splice(indexOfItem,1);
   }
 });
 
