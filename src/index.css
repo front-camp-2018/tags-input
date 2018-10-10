@@ -24,21 +24,37 @@ ul {
 }
 
 .title-level-1 {
-  margin-bottom: 25px;
+  margin-bottom: 40px;
 }
 
 .title-level-2 {
   margin-bottom: 15px;
 }
 
-#tags-input {
+#tag-input-1 {
   height: 40px;
   font-size: 24px;
-  padding: 0 10px;
+  padding: 0 5px;
   margin-bottom: 20px;
 }
 
-#tags-list {
+#tag-input-2 {
+  height: 40px;
+  font-size: 24px;
+  padding: 0 5px;
+  margin-bottom: 20px;
+}
+
+#tag-list-1 {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+#tag-list-2 {
   list-style: none;
   display: flex;
   align-items: center;
@@ -50,11 +66,11 @@ ul {
   height: 30px;
   display: flex;
   padding: 0 8px;
-  margin: 10px;
+  margin: 4px;
   align-items: center;
   background: #5c656e;
   color: white;
-  border-radius: 5%;
+  border-radius: 4%;
 }
 
 .tag-name {
