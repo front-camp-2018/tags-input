@@ -2,9 +2,10 @@
 
 const $tagsInputs = document.getElementsByClassName('tags-input');
 const $tagsLists = document.getElementsByClassName('tags-list');
-const tagsArrs = [[], ['1', 'super tag']];  // add default tags here
+const $errorList = document.getElementsByClassName('error-message');
+const tagsArrs = [[], ['1', 'super tag']];        // you may change default tags here
 
-for (let i = 0; i < $tagsInputs.length; i++) {  // adding input event listener
+for (let i = 0; i < $tagsInputs.length; i++) {    // adding input event listener
   $tagsInputs[i].addEventListener('keyup', ({key, target}) => {
     if (key === 'Enter' && target.value.trim()) {
       const $el = createTagElement(target.value);
@@ -13,13 +14,17 @@ for (let i = 0; i < $tagsInputs.length; i++) {  // adding input event listener
       if (!isElementExist) {
         $tagsLists[i].appendChild($el);
         tagsArrs[i].push(target.value);
-        target.value = '';
+        target.value = '';        
+      } else {                                    // if you try to add existed tag
+        $errorList[i].classList.remove("no-visible");
       }
+    } else {
+      $errorList[i].classList.add("no-visible")   // if you continue typing
     }
   });
 };
 
-for (let i = 0; i < $tagsLists.length; i++) {   // adding romoving event listener
+for (let i = 0; i < $tagsLists.length; i++) {     // adding romoving event listener
   $tagsLists[i].addEventListener('click', event => {
     const {target} = event;
     const isRemoveBtn = target.classList.contains('remove-btn');
@@ -53,8 +58,7 @@ const init = () => {
       const $el = createTagElement(tagValue);
   
       $tagsLists[i].appendChild($el);    
-    });
-    //console.error(tagsArrs);
+    });    
   };
 };
 
