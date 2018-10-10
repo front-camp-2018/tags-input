@@ -16,10 +16,10 @@ ul {
 #app {
   height: 100%;
   background: #2d353c;
-  color: white;  
+  color: white;
   display: flex;
   justify-content: center;
-   flex-direction: column;
+  flex-direction: column;
 }
 
 .title-level-1 {
@@ -35,8 +35,6 @@ ul {
   margin-bottom: 20px;
 }
 
-
-
 .title-level-2 {
   margin-bottom: 15px;
 }
@@ -47,6 +45,12 @@ ul {
   padding: 0 10px;
   margin-bottom: 20px;
 }
+
+.invalid-value {
+  border: 2px solid red;
+  outline: none;
+}
+
 .tags-list {
   list-style: none;
   display: flex;
