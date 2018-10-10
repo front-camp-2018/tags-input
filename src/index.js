@@ -1,13 +1,5 @@
 'use strict';
 
-const $tagsInput = document.getElementById('tag-input-1');
-const $tagsList = document.getElementById('tag-list-1');
-const tagsArr = [];
-
-const $tagsInput2 = document.getElementById('tag-input-2');
-const $tagsList2 = document.getElementById('tag-list-2');
-const tagsArr2 = ['tag1', 'some awesome tag'];
-
 const createTagElement = content => {
   const $li = document.createElement('li');
 
@@ -57,6 +49,14 @@ const init = (arr, input, list) => {
   });
 };
 
+const $tagsInput = document.getElementById('tag-input-1');
+const $tagsList = document.getElementById('tag-list-1');
+const tagsArr = [];
+
+const $tagsInput2 = document.getElementById('tag-input-2');
+const $tagsList2 = document.getElementById('tag-list-2');
+const tagsArr2 = ['tag1', 'some awesome tag'];
+
 const arr =  tagsArr;
 const input = $tagsInput;
 const list = $tagsList;
@@ -65,7 +65,12 @@ const arr2 =  tagsArr2;
 const input2 = $tagsInput2;
 const list2 = $tagsList2;
 
-init(arr, input, list);
-init(arr2, input2, list2);
+const modal = document.getElementById('myModal');
 
+const btn = document.getElementById('myBtn');
 
+btn.onclick = function() {
+  modal.style.display = 'block';
+  init(arr, input, list);
+  init(arr2, input2, list2);
+};
