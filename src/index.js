@@ -1,35 +1,47 @@
 'use strict';
 
-const $tagsInput = document.getElementById('tags-input');
+const $tagsInputFirst = document.getElementById('tags-input-1');
+const $tagsInputSecond = document.getElementById('tags-input-2');
 const $tagsList = document.getElementById('tags-list');
-const tagsArr = ['1', 'super tag'];
+const $tagsListDefault = document.getElementById('tags-list-default');
+const tagsArr = [];
+const tagsArrDefault = ['tag1', 'some awesome tag'];
 
-$tagsInput.addEventListener('keyup', ({key, target}) => {
-  if (key === 'Enter' && target.value.trim()) {
-    const $el = createTagElement(target.value);
-    const isElementExist = tagsArr.includes(target.value);
+const handleAddEventListener = (tag, ul, array) => {
+  tag.addEventListener('keyup', ({ key, target }) => {
+    if (key === 'Enter' && target.value.trim()) {
+      const $el = createTagElement(target.value);
+      const isElementExist = array.includes(target.value);
 
-    if (!isElementExist) {
-      $tagsList.appendChild($el);
-      tagsArr.push(target.value);
-      target.value = '';
+      if (!isElementExist) {
+        ul.appendChild($el);
+        array.push(target.value);
+        target.value = '';
+      }
     }
-  }
-});
+  });
+};
 
-$tagsList.addEventListener('click', event => {
-  const {target} = event;
-  const isRemoveBtn = target.classList.contains('remove-btn');
-  const $foo = target.parentElement.parentElement;
-  const $tag = target.parentElement;
+handleAddEventListener($tagsInputFirst, $tagsList, tagsArr);
+handleAddEventListener($tagsInputSecond, $tagsListDefault, tagsArrDefault);
 
-  if (isRemoveBtn) {
-    $foo.removeChild($tag);
+const handleRemoveEventListener = (tag, array) => {
+  tag.addEventListener('click', event => {
+    const { target } = event;
+    const isRemoveBtn = target.classList.contains('remove-btn');
+    const $tagsList = target.parentElement.parentElement;
+    const $tag = target.parentElement;
+    const $tagValue = $tag.firstElementChild.textContent;
 
-    // TODO: remove element from array
-    // tagsArr.splice();
-  }
-});
+    if (isRemoveBtn) {
+      $tagsList.removeChild($tag);
+      array.splice(array.indexOf($tagValue), 1);
+    }
+  });
+};
+
+handleRemoveEventListener($tagsList, tagsArr);
+handleRemoveEventListener($tagsListDefault, tagsArrDefault);
 
 const createTagElement = content => {
   const $li = document.createElement('li');
@@ -37,18 +49,26 @@ const createTagElement = content => {
   $li.className = 'tags-list-item';
   $li.innerHTML = `
     <span class="tag-name">${content}</span>
-    <span class="remove-btn">x</span>
+    <span class="remove-btn" onmouseover="color(this)" onmouseout="normalColor(this)">x</span>
   `;
 
   return $li;
 };
 
-const init = () => {
-  tagsArr.forEach(tagValue => {
+const color = x => {
+  x.style.color = '#ff4d4d';
+};
+
+const normalColor = x => {
+  x.style.color = '#cedff2';
+};
+
+const init = array => {
+  array.forEach(tagValue => {
     const $el = createTagElement(tagValue);
 
-    $tagsList.appendChild($el);
+    $tagsListDefault.appendChild($el);
   });
 };
 
-init();
+init(tagsArrDefault);
