@@ -35,29 +35,29 @@ $tagsInputDefault.addEventListener('keyup', ({key, target}) => {
 
 $tagsListSimple.addEventListener('click', event => {
   const {target} = event;
-  const isRemoveBtn = target.classList.contains('remove-btn');
-  const $foo = target.parentElement.parentElement;
-  const $tag = target.parentElement;
 
-  if (isRemoveBtn) {
-    $foo.removeChild($tag);
+  if (target.classList.contains('remove-btn')) {
+    const $tag = target.parentElement;
+    $tag.parentElement.removeChild($tag);
+    var removeValue = $tag.getElementsByClassName('tag-name')[0].textContent;
+    var removeElementIndex = tagsArrSimple.indexOf(removeValue.trim());
+    if (removeElementIndex > -1) {
+      tagsArrSimple.splice(removeElementIndex, 1);
+    }
   }
 });
 
 $tagsListDefault.addEventListener('click', event => {
   const {target} = event;
-  const isRemoveBtn = target.classList.contains('remove-btn');
-  const $foo = target.parentElement.parentElement;
-  const $tag = target.parentElement;
 
-  if (isRemoveBtn) {
-    $foo.removeChild($tag);
-
-    var removeValue = $tag.textContent.split('\n');
-    var removeElement = tagsArrDefault.indexOf(removeValue[1].trim());
-    $foo.removeChild($tag);
-    tagsArrDefault.splice(removeElement, 1);
-
+  if (target.classList.contains('remove-btn')) {
+    const $tag = target.parentElement;
+    $tag.parentElement.removeChild($tag);
+    var removeValue = $tag.getElementsByClassName('tag-name')[0].textContent;
+    var removeElementIndex = tagsArrDefault.indexOf(removeValue.trim());
+    if (removeElementIndex > -1) {
+      tagsArrDefault.splice(removeElementIndex, 1);
+    }
   }
 });
 
@@ -66,9 +66,9 @@ const createTagElement = content => {
 
   $li.className = 'tags-list-item';
   $li.innerHTML = `
-    <span class="tag-name">${content}</span>
-    <span class="remove-btn">x</span>
-  `;
+          <span class="tag-name">${content}</span>
+      <span class="remove-btn">x</span>
+    `;
 
   return $li;
 };
