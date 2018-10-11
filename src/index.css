@@ -67,3 +67,12 @@ ul {
   border-left: 1px solid #363d48;
   cursor: pointer;
 }
+
+.clear-btn {
+  height: 50px;
+  width: 275px;
+  margin: 20px;
+  font-size: 24px;
+  background: rgb(7, 29, 31);
+  color: #637992;
+}
