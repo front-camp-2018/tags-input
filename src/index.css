@@ -31,14 +31,26 @@ ul {
   margin-bottom: 15px;
 }
 
-#tags-input {
+.inputs-wrapper{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+input{
   height: 40px;
   font-size: 24px;
   padding: 0 10px;
   margin-bottom: 20px;
 }
 
-#tags-list {
+.color-picker{
+	height: 40px;
+	width: 40px;
+	margin-left: 10px;
+	padding: 0 3px;
+}
+
+ul {
   list-style: none;
   display: flex;
   align-items: center;
