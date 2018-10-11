@@ -12,9 +12,22 @@
   <main id="app">
     <h1 class="title-level-1">Tags Input App</h1>
     <h2 class="title-level-2">Simple Input</h2>
-    <input id="tags-input" type="text" placeholder="type your tags..." />
+    <div class="input-container">
+      <input
+        id="tags-input"
+        type="text"
+        placeholder="type your tag..."
+        maxlength="20"
+        autofocus
+      />
+      <p>*max length 20 symb., confirm: &lt;Enter&gt;, clear: &lt;Esc&gt;</p>
+      <p id="warning" hidden="true">This tag already exists!</p>
+
+    </div>
+    <p id="similar-tag-list" class="similar-tag-list"></p>
     <ul id="tags-list"></ul>
   </main>
   <script src="src/index.js"></script>
+
 </body>
 </html>
