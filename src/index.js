@@ -79,7 +79,7 @@ const handleColorPicker = (colorInput, id) => {
   });
 };
 
-const redColor = el => {
+const redColorChange = el => {
   el.style.color = '#ff4d4d';
 };
 
