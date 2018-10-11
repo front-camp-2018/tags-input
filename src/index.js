@@ -7,7 +7,14 @@ const tagsArrWithDefault = ['1', 'some tag',];
 
 const addTagEventHandler = (event, outputElement, localArr) => {
   const { key, target } = event;
-  
+  const checkForVisiblePopups = document.getElementsByClassName('popup show');
+
+  if (checkForVisiblePopups.length > 0) {
+    [...checkForVisiblePopups].forEach(popup => {
+      popup.classList.remove('show');
+    });
+  }
+
   if (key === 'Enter' && target.value) {
     const $el = createTagElement(target.value);
     const doesElementExist = localArr.includes(target.value);
@@ -16,6 +23,9 @@ const addTagEventHandler = (event, outputElement, localArr) => {
       outputElement.appendChild($el);
       localArr.push(target.value);
       target.value = '';
+    } else {
+      const popup = target.parentElement.children[1];
+      popup.classList.add('show');
     }
   }
 };
@@ -43,7 +53,7 @@ const createTagElement = content => {
 };
 
 const init = () => {
-  
+
   const populateDefaultTags = () => {
     tagsArrWithDefault.forEach(tagValue => {
       const $el = createTagElement(tagValue);
