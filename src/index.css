@@ -11,6 +11,7 @@ h2,
 ul {
   margin: 0;
   padding: 0;
+  margin-bottom: 10px;
 }
 
 #app {
@@ -31,14 +32,16 @@ ul {
   margin-bottom: 15px;
 }
 
-#tags-input {
+#tags-input,
+#tags-input-2 {
   height: 40px;
   font-size: 24px;
   padding: 0 10px;
-  margin-bottom: 20px;
+  margin: 20px;
 }
 
-#tags-list {
+#tags-list,
+#tags-list-2 {
   list-style: none;
   display: flex;
   align-items: center;
