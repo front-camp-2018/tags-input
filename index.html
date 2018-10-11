@@ -1,20 +1,27 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tags Input</title>
   <link rel="stylesheet" href="./src/index.css">
+  <link rel="stylesheet" href="./src/snackbar.css">
 </head>
+
 <body>
   <main id="app">
     <h1 class="title-level-1">Tags Input App</h1>
     <h2 class="title-level-2">Simple Input</h2>
-    <input id="tags-input" type="text" placeholder="type your tags..." />
-    <ul id="tags-list"></ul>
+    <input id="simple-tags-input" class="tags-input" type="text" placeholder="type your tags..." />
+    <ul id="simple-tags-list" class="tags-list"></ul>
+    <h2 class="title-level-2">Input with default tags</h2>
+    <input id="default-tags-input" class="tags-input" type="text" placeholder="type your tags..." />
+    <ul id="default-tags-list" class="tags-list"></ul>
   </main>
+  <div id="snackbar">Tag already exists</div>
   <script src="src/index.js"></script>
 </body>
+
 </html>

@@ -1,53 +1,70 @@
 'use strict';
 
-const $tagsInput = document.getElementById('tags-input');
-const $tagsList = document.getElementById('tags-list');
-const tagsArr = ['1', 'super tag'];
+const $simpleTagsInput = document.getElementById('simple-tags-input');
+const $simpleTagsList = document.getElementById('simple-tags-list');
+const $defaultTagsInput = document.getElementById('default-tags-input');
+const $defaultTagsList = document.getElementById('default-tags-list');
+const defaultTagsArr = ['1', 'super tag'];
+const tagsArr = [];
 
-$tagsInput.addEventListener('keyup', ({key, target}) => {
+function createTag({ key, target }, arr, tagList) {
   if (key === 'Enter' && target.value.trim()) {
     const $el = createTagElement(target.value);
-    const isElementExist = tagsArr.includes(target.value);
+    const isElementExist = arr.includes(target.value);
 
     if (!isElementExist) {
-      $tagsList.appendChild($el);
-      tagsArr.push(target.value);
+      tagList.appendChild($el);
+      arr.push(target.value);
       target.value = '';
+    } else {
+      const $snackBar = document.getElementById('snackbar');
+      $snackBar.className = 'show';
+      setTimeout(() => { $snackBar.className = $snackBar.className.replace('show', ''); }, 3000);
     }
   }
-});
+}
 
-$tagsList.addEventListener('click', event => {
-  const {target} = event;
+function removeTag(event, arr) {
+  const { target } = event;
   const isRemoveBtn = target.classList.contains('remove-btn');
   const $foo = target.parentElement.parentElement;
   const $tag = target.parentElement;
+  const text = $tag.getElementsByClassName('tag-name')[0].innerHTML;
 
   if (isRemoveBtn) {
     $foo.removeChild($tag);
-
-    // TODO: remove element from array
-    // tagsArr.splice();
+    const index = arr.indexOf(text);
+    arr.splice(index, 1);
   }
-});
+}
+
+$defaultTagsInput.addEventListener('keyup',
+  () => createTag(event, defaultTagsArr, $defaultTagsList));
+$defaultTagsList.addEventListener('click',
+  () => removeTag(event, defaultTagsArr));
+
+$simpleTagsInput.addEventListener('keyup',
+  () => createTag(event, tagsArr, $simpleTagsList));
+$simpleTagsList.addEventListener('click',
+  () => removeTag(event, tagsArr));
 
 const createTagElement = content => {
   const $li = document.createElement('li');
 
   $li.className = 'tags-list-item';
   $li.innerHTML = `
-    <span class="tag-name">${content}</span>
-    <span class="remove-btn">x</span>
+    <span class='tag-name'>${content}</span>
+    <span class='remove-btn'>x</span>
   `;
 
   return $li;
 };
 
 const init = () => {
-  tagsArr.forEach(tagValue => {
+  defaultTagsArr.forEach(tagValue => {
     const $el = createTagElement(tagValue);
 
-    $tagsList.appendChild($el);
+    $defaultTagsList.appendChild($el);
   });
 };
 
