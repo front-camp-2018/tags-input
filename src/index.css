@@ -30,6 +30,7 @@ ul {
 .title-level-2 {
   margin-bottom: 15px;
 }
+
 .inputs-wrapper{
 	display: flex;
 	align-items: center;
@@ -41,6 +42,7 @@ input{
   padding: 0 10px;
   margin-bottom: 20px;
 }
+
 .color-picker{
 	height: 40px;
 	width: 40px;
