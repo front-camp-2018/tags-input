@@ -1,54 +1,61 @@
 'use strict';
 
-const $tagsInput = document.getElementById('tags-input');
-const $tagsList = document.getElementById('tags-list');
-const tagsArr = ['1', 'super tag'];
+// need to add some restrict of the langth of tags
+// add error "tag is already exist"
 
-$tagsInput.addEventListener('keyup', ({key, target}) => {
-  if (key === 'Enter' && target.value.trim()) {
-    const $el = createTagElement(target.value);
-    const isElementExist = tagsArr.includes(target.value);
+const TagInput = class {
+  constructor(inputCss, savedTags = []) {
+    this.$tagsInput = document.querySelector(inputCss);
+    this.$tagsList = this.$tagsInput.nextSibling.nextSibling;
+    this.tagsArr = savedTags;
 
-    if (!isElementExist) {
-      $tagsList.appendChild($el);
-      tagsArr.push(target.value);
-      target.value = '';
-    }
+    this.$tagsInput.addEventListener('keyup', ({key, target}) => {
+      if (key === 'Enter' && target.value.trim()) {
+        const $el = this.createTagElement(target.value);
+        const isElementExist = this.tagsArr.includes(target.value);
+
+        if (!isElementExist) {
+          this.$tagsList.appendChild($el);
+          this.tagsArr.push(target.value);
+          target.value = '';
+        }
+      }
+    });
+
+    this.$tagsList.addEventListener('click', event => {
+      const {target} = event;
+      const isRemoveBtn = target.classList.contains('remove-btn');
+      const $foo = target.parentElement.parentElement;
+      const $tag = target.parentElement;
+
+      if (isRemoveBtn) {
+        const tagText = $tag.children[0].innerText;
+        this.tagsArr.splice(this.tagsArr.indexOf(tagText), 1);
+
+        $foo.removeChild($tag);
+
+        // TODO: remove element from array
+        // tagsArr.splice();
+      }
+    });
   }
-});
+  createTagElement(content) {
+    const $li = document.createElement('li');
 
-$tagsList.addEventListener('click', event => {
-  const {target} = event;
-  const isRemoveBtn = target.classList.contains('remove-btn');
-  const $foo = target.parentElement.parentElement;
-  const $tag = target.parentElement;
+    $li.className = 'tags-list-item';
+    $li.innerHTML = `
+      <span class="tag-name">${content}</span>
+      <span class="remove-btn">x</span>
+    `;
 
-  if (isRemoveBtn) {
-    $foo.removeChild($tag);
-
-    // TODO: remove element from array
-    // tagsArr.splice();
+    return $li;
   }
-});
 
-const createTagElement = content => {
-  const $li = document.createElement('li');
+  init() {
+    this.tagsArr.forEach(tagValue => {
+      const $el = this.createTagElement(tagValue);
 
-  $li.className = 'tags-list-item';
-  $li.innerHTML = `
-    <span class="tag-name">${content}</span>
-    <span class="remove-btn">x</span>
-  `;
-
-  return $li;
+      this.$tagsList.appendChild($el);
+    });
+  }
 };
-
-const init = () => {
-  tagsArr.forEach(tagValue => {
-    const $el = createTagElement(tagValue);
-
-    $tagsList.appendChild($el);
-  });
-};
-
-init();
