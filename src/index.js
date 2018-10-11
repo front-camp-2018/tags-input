@@ -2,22 +2,33 @@
 
 const $tagsInput = document.getElementById('tags-input');
 const $tagsList = document.getElementById('tags-list');
-const tagsArr = ['1', 'super tag'];
+const $defTagsInput = document.getElementById('default-tags-input');
+const $defTagsList = document.getElementById('default-tags-list');
+const tagsArr = [];
+const defTagsArr = ['tag1', 'some awesome tag'];
 
-$tagsInput.addEventListener('keyup', ({key, target}) => {
+const inputListenerFunc = function(key, target, arr, list){
   if (key === 'Enter' && target.value.trim()) {
     const $el = createTagElement(target.value);
-    const isElementExist = tagsArr.includes(target.value);
+    const isElementExist = arr.includes(target.value);
 
     if (!isElementExist) {
-      $tagsList.appendChild($el);
-      tagsArr.push(target.value);
+      list.appendChild($el);
+      arr.push(target.value);
       target.value = '';
     }
   }
+};
+
+$tagsInput.addEventListener('keyup', ({key, target}) => {
+  inputListenerFunc(key, target, tagsArr, $tagsList);
 });
 
-$tagsList.addEventListener('click', event => {
+$defTagsInput.addEventListener('keyup', ({key, target}) => {
+  inputListenerFunc(key, target, defTagsArr, $defTagsList);
+});
+
+const listListenerFunc = function(event, arr){
   const {target} = event;
   const isRemoveBtn = target.classList.contains('remove-btn');
   const $foo = target.parentElement.parentElement;
@@ -25,10 +36,17 @@ $tagsList.addEventListener('click', event => {
 
   if (isRemoveBtn) {
     $foo.removeChild($tag);
-
-    // TODO: remove element from array
-    // tagsArr.splice();
+    const text = $tag.innerText.trim().substr(0, $tag.innerText.trim().length-1).trim();
+    arr.splice(arr.indexOf(text), 1);
   }
+};
+
+$tagsList.addEventListener('click', event => {
+  listListenerFunc(event, tagsArr);
+});
+
+$defTagsList.addEventListener('click', event => {
+  listListenerFunc(event, defTagsArr);
 });
 
 const createTagElement = content => {
@@ -48,6 +66,13 @@ const init = () => {
     const $el = createTagElement(tagValue);
 
     $tagsList.appendChild($el);
+
+  });
+  defTagsArr.forEach(tagValue => {
+    const $el = createTagElement(tagValue);
+
+    $defTagsList.appendChild($el);
+
   });
 };
 
