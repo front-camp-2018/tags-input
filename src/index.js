@@ -38,11 +38,12 @@ $defaultTagsList.addEventListener('click', event => {
   const isRemoveBtn = target.classList.contains('remove-btn');
   const $foo = target.parentElement.parentElement;
   const $tag = target.parentElement;
-
+  
   if (isRemoveBtn) {
-    $foo.removeChild($tag);
-
-    // TODO: remove element from array
+    $tag.style.animationName = "anim-del";
+    setTimeout(() => {
+      $foo.removeChild($tag);
+    }, 250);
     defaultTagsArr.splice(defaultTagsArr.indexOf($tag.children[0].textContent), 1);
   }
 });
@@ -54,10 +55,10 @@ $simpleTagsList.addEventListener('click', event => {
   const $tag = target.parentElement;  
 
   if (isRemoveBtn) {
-    $foo.removeChild($tag);
-
-    // TODO: remove element from array
-
+    $tag.style.animationName = "anim-del";
+    setTimeout(() => {
+      $foo.removeChild($tag);
+    }, 250);
     simpleTagsArr.splice(simpleTagsArr.indexOf($tag.children[0].textContent), 1);
   }
 });
@@ -83,5 +84,7 @@ const init = () => {
     $defaultTagsList.appendChild($el);
   });
 };
+
+
 
 init();

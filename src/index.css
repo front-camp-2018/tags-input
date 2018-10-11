@@ -39,6 +39,7 @@ ul {
   margin-bottom: 20px;
 }
 
+
 #tags-list-simple,
 #tags-list-default {
   list-style: none;
@@ -57,7 +58,15 @@ ul {
   background: #5c656e;
   color: white;
   border-radius: 5%;
+
+  animation-name: anim-create;
+  animation-duration: 0.3s;
 }
+
+.tags-list-item:hover{
+  transform: scale(1.1, 1.1);
+}
+
 
 .tag-name {
   padding: 0 5px;
@@ -68,4 +77,19 @@ ul {
   padding-left: 8px;
   border-left: 1px solid #363d48;
   cursor: pointer;
+  transition: 0.3s
+}
+
+.remove-btn:hover {
+  color: red;
+}
+
+@keyframes anim-create{
+  to{transform: scale(1); opacity: 1;}
+  from{transform: scale(0.5); opacity: 0;}
+}
+
+@keyframes anim-del{
+  from{transform: scale(1); opacity: 1;}
+  to{transform: scale(0.5); opacity: 0;}
 }
