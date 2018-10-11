@@ -31,19 +31,21 @@ ul {
   margin-bottom: 15px;
 }
 
-#tags-input {
+#tags-input-simple,
+#tags-input-default {
   height: 40px;
   font-size: 24px;
   padding: 0 10px;
   margin-bottom: 20px;
 }
 
-#tags-list {
+#tags-list-simple,
+#tags-list-default {
   list-style: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
 }
 
 .tags-list-item {
