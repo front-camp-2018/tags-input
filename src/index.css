@@ -23,22 +23,33 @@ ul {
   flex-direction: column;
 }
 
-.title-level-1 {
-  margin-bottom: 25px;
-}
-
 .title-level-2 {
-  margin-bottom: 15px;
+  margin: 20px 0;
 }
 
-#tags-input {
+.tags-input {
   height: 40px;
   font-size: 24px;
   padding: 0 10px;
-  margin-bottom: 20px;
+  
 }
 
-#tags-list {
+.error {
+  width  : 316px; 
+  padding: 0;
+  font-size: 80%;
+  color: white;
+  background-color: darkred;
+  border-radius: 0 0 5px 5px;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+}
+
+.error.active {
+  padding: 0.3rem;
+}
+
+.tags-list {
   list-style: none;
   display: flex;
   align-items: center;
