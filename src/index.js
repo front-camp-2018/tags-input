@@ -46,7 +46,13 @@ $tagsList.addEventListener('click', ({target}) => {
   }
 });
 
-const unifyTag = str => str.trim().toLowerCase();
+const unifyTag = str => {
+  // let rez = str.split(' ')
+  //   .filter(substr => substr)
+  //   .join(' ')
+  //   .toLowerCase();
+  return str.replace(/\s+/g,' ').trim().toLowerCase();
+};
 
 const similarTags = str => {
   if (str) {
