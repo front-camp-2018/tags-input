@@ -6,10 +6,7 @@ body {
   margin: 0;
 }
 
-h1,
-h2,
 ul {
-  margin: 0;
   padding: 0;
 }
 
@@ -23,27 +20,22 @@ ul {
   flex-direction: column;
 }
 
-.title-level-1 {
-  margin-bottom: 25px;
-}
-
-.title-level-2 {
-  margin-bottom: 15px;
-}
-
-#tags-input {
+#tags-input-1,
+#tags-input-2 {
   height: 40px;
   font-size: 24px;
-  padding: 0 10px;
-  margin-bottom: 20px;
-}
+  padding: 0 5px;
+  outline: none;
+ }
 
-#tags-list {
+.tags-list {
+  max-width: 90%;
+  font-size: 18px;
   list-style: none;
+  padding: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
+
 }
 
 .tags-list-item {
@@ -66,4 +58,99 @@ ul {
   padding-left: 8px;
   border-left: 1px solid #363d48;
   cursor: pointer;
+  transition: .4s ease-out;
+}
+
+.remove-btn:hover {
+  color: red;
+}
+
+#question {  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  transition: .4s ease-out;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.question-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #5c656e;
+  margin: 15% auto;  
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  width: 300px;
+  height: 150px;
+  position: relative;
+}
+
+#alert-msg {
+  font-size: 18px;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 10px 10px;
+}
+
+.question-content>.btn {
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none;
+}
+
+.question-content>.accept {
+  background: #4CAF50;
+}
+
+.question-content>.accept:hover {
+  background-color: #46a049;
+}
+
+.question-content>.cancel {
+  background-color: #f44336;
+} 
+
+.question-content>.cancel:hover {
+  background: #da190b;
+}
+
+#close-btn {
+  position: absolute;  
+  top: 3px;
+  right: 8px;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .4s ease-out;
+}
+
+#close-btn:hover {
+  color: red;
+  text-decoration: none;  
 }
