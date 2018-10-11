@@ -1,81 +1,19 @@
 'use strict';
 
-const $tagsInputFirst = document.getElementById('tags-input-1');
-const $tagsInputSecond = document.getElementById('tags-input-2');
-const $tagsList = document.getElementById('tags-list');
-const $tagsListDefault = document.getElementById('tags-list-default');
-const $colorInputFirst = document.getElementById('color');
-const $colorInputSecond = document.getElementById('color-second');
-const tagsArr = [];
-const tagsArrDefault = ['tag1', 'some awesome tag'];
-let $tagColor = '';
-
-const handleColorPicker = (colorInput, id) => {
-  colorInput.addEventListener('input', () => {
-    const $colorInputValue = document.getElementById(id).value;
-    $tagColor = $colorInputValue;
-  });
-};
-
-handleColorPicker($colorInputFirst, 'color');
-handleColorPicker($colorInputSecond, 'color-second');
-
-const handleAddEventListener = (tag, ul, array) => {
-  tag.addEventListener('keyup', ({ key, target }) => {
-    if (key === 'Enter' && target.value.trim()) {
-      const $el = createTagElement(target.value);
-      const isElementExist = array.includes(target.value);
-
-      if (!isElementExist) {
-        ul.appendChild($el);
-        array.push(target.value);
-        target.value = '';
-      }
-    }
-  });
-};
-
-handleAddEventListener($tagsInputFirst, $tagsList, tagsArr);
-handleAddEventListener($tagsInputSecond, $tagsListDefault, tagsArrDefault);
-
-const handleRemoveEventListener = (tag, array) => {
-  tag.addEventListener('click', event => {
-    const { target } = event;
-    const isRemoveBtn = target.classList.contains('remove-btn');
-    const $tagsList = target.parentElement.parentElement;
-    const $tag = target.parentElement;
-    const $tagValue = $tag.firstElementChild.textContent;
-
-    if (isRemoveBtn) {
-      $tagsList.removeChild($tag);
-      array.splice(array.indexOf($tagValue), 1);
-    }
-  });
-};
-
-handleRemoveEventListener($tagsList, tagsArr);
-handleRemoveEventListener($tagsListDefault, tagsArrDefault);
-
-const createTagElement = content => {
-  const $li = document.createElement('li');
-
-  $li.className = 'tags-list-item';
-  $li.style = `background-color: ${$tagColor}`;
-  $li.innerHTML = `
-    <span class="tag-name">${content}</span>
-    <span class="remove-btn" onmouseover="color(this)" onmouseout="normalColor(this)">x</span>
-  `;
-
-  return $li;
-};
-
-const color = x => {
-  x.style.color = '#ff4d4d';
-};
-
-const normalColor = x => {
-  x.style.color = '#cedff2';
-};
+const $tagsInputFirst = document.getElementById('tags-input-1'),
+  $tagsInputSecond = document.getElementById('tags-input-2'),
+  $tagsList = document.getElementById('tags-list'),
+  $tagsListDefault = document.getElementById('tags-list-default'),
+  $colorInputFirst = document.getElementById('color'),
+  $colorInputSecond = document.getElementById('color-second'),
+  tagsArr = [],
+  tagsArrDefault = ['tag1', 'some awesome tag'],
+  ENTER = 'Enter',
+  KEY_UP = 'keyup',
+  CLICK = 'click',
+  INPUT = 'input',
+  EMPTY_VALUE = '';
+let $tagColor = EMPTY_VALUE;
 
 const init = array => {
   array.forEach(tagValue => {
@@ -85,4 +23,74 @@ const init = array => {
   });
 };
 
+const handleAddEventListener = (tag, ul, array) => {
+  tag.addEventListener(KEY_UP, ({ key, target }) => {
+    if (key === ENTER && target.value.trim()) {
+      const $el = createTagElement(target.value),
+        isElementExist = array.includes(target.value);
+
+      if (!isElementExist) {
+        ul.appendChild($el);
+        array.push(target.value);
+        target.value = EMPTY_VALUE;
+      }
+    }
+  });
+};
+
+const handleRemoveEventListener = (tag, array) => {
+  tag.addEventListener(CLICK, event => {
+    const { target } = event,
+      isRemoveBtn = target.classList.contains('remove-btn'),
+      $tagsList = target.parentElement.parentElement,
+      $tag = target.parentElement,
+      $tagValue = $tag.firstElementChild.textContent;
+
+    if (isRemoveBtn) {
+      $tagsList.removeChild($tag);
+      array.splice(array.indexOf($tagValue), 1);
+    }
+  });
+};
+
+const createTagElement = content => {
+  const $li = document.createElement('li');
+
+  $li.className = 'tags-list-item';
+  $li.style = `background-color: ${$tagColor}`;
+  $li.innerHTML = `
+  <span class="tag-name">${content}</span>
+  <span 
+  id="removeBtn" 
+  class="remove-btn" 
+  onmouseover="redColorChange(this)" 
+  onmouseout="defaultColorChange(this)"
+  >x</span>
+  `;
+
+  return $li;
+};
+
+const handleColorPicker = (colorInput, id) => {
+  colorInput.addEventListener(INPUT, () => {
+    const $colorInputValue = document.getElementById(id).value;
+
+    $tagColor = $colorInputValue;
+  });
+};
+
+const redColor = el => {
+  el.style.color = '#ff4d4d';
+};
+
+const defaultColorChange = el => {
+  el.style.color = '#cedff2';
+};
+
 init(tagsArrDefault);
+handleColorPicker($colorInputFirst, 'color');
+handleColorPicker($colorInputSecond, 'color-second');
+handleAddEventListener($tagsInputFirst, $tagsList, tagsArr);
+handleAddEventListener($tagsInputSecond, $tagsListDefault, tagsArrDefault);
+handleRemoveEventListener($tagsList, tagsArr);
+handleRemoveEventListener($tagsListDefault, tagsArrDefault);
