@@ -4,8 +4,21 @@ const $tagsInputFirst = document.getElementById('tags-input-1');
 const $tagsInputSecond = document.getElementById('tags-input-2');
 const $tagsList = document.getElementById('tags-list');
 const $tagsListDefault = document.getElementById('tags-list-default');
+const $colorInputFirst = document.getElementById('color');
+const $colorInputSecond = document.getElementById('color-second');
 const tagsArr = [];
 const tagsArrDefault = ['tag1', 'some awesome tag'];
+let $tagColor = '';
+
+const handleColorPicker = (colorInput, id) => {
+  colorInput.addEventListener('input', () => {
+    const $colorInputValue = document.getElementById(id).value;
+    $tagColor = $colorInputValue;
+  });
+};
+
+handleColorPicker($colorInputFirst, 'color');
+handleColorPicker($colorInputSecond, 'color-second');
 
 const handleAddEventListener = (tag, ul, array) => {
   tag.addEventListener('keyup', ({ key, target }) => {
@@ -47,6 +60,7 @@ const createTagElement = content => {
   const $li = document.createElement('li');
 
   $li.className = 'tags-list-item';
+  $li.style = `background-color: ${$tagColor}`;
   $li.innerHTML = `
     <span class="tag-name">${content}</span>
     <span class="remove-btn" onmouseover="color(this)" onmouseout="normalColor(this)">x</span>

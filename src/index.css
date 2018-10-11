@@ -72,3 +72,19 @@ ul {
   border-left: 1px solid #363d48;
   cursor: pointer;
 }
+
+.input-wrap {
+  display: flex;
+  align-items: flex-start;
+}
+
+.color-input {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+#color,
+#color-second {
+  width: 100%;
+}

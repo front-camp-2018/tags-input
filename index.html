@@ -13,10 +13,22 @@
   <main id="app">
     <h1 class="title-level-1">Tags Input App</h1>
     <h2 class="title-level-2">Simple Input:</h2>
-    <input id="tags-input-1" type="text" class="red-text" placeholder="put your tags..." />
+    <div class="input-wrap">
+      <input id="tags-input-1" type="text" class="red-text" placeholder="put your tags..." />
+      <div class="color-input">
+        <label for="color">tag color:</label>
+        <input type="color" id="color" name="color" value="#5c656e" />
+      </div>
+    </div>
     <ul id="tags-list"></ul>
     <h2 class="title-level-2">Input with default tags:</h2>
-    <input id="tags-input-2" type="text" placeholder="put your tags..." />
+    <div class="input-wrap">
+      <input id="tags-input-2" type="text" placeholder="put your tags..." />
+      <div class="color-input">
+        <label for="color-second">tag color:</label>
+        <input type="color" id="color-second" name="color-second" value="#5c656e" />
+      </div>
+    </div>
     <ul id="tags-list-default"></ul>
   </main>
   <script src="src/index.js"></script>
