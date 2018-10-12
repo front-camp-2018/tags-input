@@ -27,14 +27,14 @@ ul {
   margin-bottom: 25px;
 }
 
-#tags-input {
+#tags-input, #tags-input2 {
   font-size: 18px;
   padding: 5 10px;
   margin-bottom: 20px;
   text-align: center;
 }
 
-#tags-list {
+#tags-list, #tags-list2 {
   list-style: none;
   display: flex;
   align-items: center;
