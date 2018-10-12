@@ -82,3 +82,16 @@ ul {
 .option-btn {
   height: 44px;
 }
+
+.hint{
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgba(128, 128, 128, 0.5);
+  width: 200px;
+  height: 100px;
+  visibility: hidden;
+}

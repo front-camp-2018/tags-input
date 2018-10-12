@@ -23,12 +23,12 @@ $tagsList.addEventListener('click', event => {
   const isRemoveBtn = target.classList.contains('remove-btn');
   const $foo = target.parentElement.parentElement;
   const $tag = target.parentElement;
+  const $prevElem = target.previousElementSibling;
 
   if (isRemoveBtn) {
     $foo.removeChild($tag);
-
-    // TODO: remove element from array
-    // tagsArr.splice();
+    tagsArr.splice(tagsArr.indexOf($prevElem.textContent), 1);
+    console.log(tagsArr);
   }
 });
 
@@ -53,7 +53,7 @@ const init = () => {
 };
 
 init();
-
+// Rework
 class customInput{
   constructor(title){
     this.cont = document.createElement('div');// wrapper for input and buttons
@@ -70,16 +70,21 @@ class customInput{
     this.tagsEnable = true;
     this.cont.append(this.input);
     main.append(this.name, this.cont, this.tags);
+    this.hintElem = new customHint(this);
+    main.append(this.hintElem);
+
     addEvents(this);
   }
   defaultTags(){
     const tagsList = ['hi', 'hello', 'bye'];
+
     this.tagsArr = [...tagsList];
     for(let value of this.tagsArr) this.tags.append(createTagElement(value));
   }
   addButton(name){
     let btn = document.createElement('button');
     let btnTypes = ['Block', 'DeleteAll', 'Sort'];
+
     if(btnTypes.includes(name)){
       btn.name =`${name}`;
       btn.textContent = `${name}`;
@@ -101,11 +106,21 @@ function addEvents(elem){
           target.value = '';
         }
         else {
-
+          let hint = elem.hintElem;
+          hint.style.visibility = 'visible';
+          hint.textContent = 'Tag exist';
+          setTimeout(function(){
+            hint.style.visibility = 'hidden';
+          }, 3000);
         }
       }
       else{
-        console.log('blocked');
+        let hint = elem.hintElem;
+        hint.style.visibility = 'visible';
+        hint.textContent = 'Tags typing is blocked';
+        setTimeout(function(){
+          hint.style.visibility = 'hidden';
+        }, 3000);
       }
     }
   });
@@ -129,10 +144,12 @@ function addEvents(elem){
         if(elem.tagsEnable){
           elem.tagsEnable = false;
           target.textContent = 'Unblock';
+          target.style.color = 'red';
         }
         else{
           elem.tagsEnable = true;
           target.textContent = 'Block';
+          target.style.color = '';
         }
         console.log(target.textContent);
         break;
@@ -153,11 +170,23 @@ function addEvents(elem){
         });
         elem.tags.innerHTML = '';
         for(let value of arr) elem.tags.append(value);
+        break;
       }
     }
   });
 }
+class customHint{
+  constructor(elem){
+    let cords = elem.input.getBoundingClientRect();
+    let hint = document.createElement('div');
 
+    console.log(elem.cont.offsetWidth);
+    hint.style.left = `${cords.left + 410}px`;
+    hint.style.top = `${cords.top - 50}px`;
+    hint.className = 'hint';
+    return hint;
+  }
+}
 let input2 = new customInput('New Input');
 input2.defaultTags();
 input2.addButton('Block');
