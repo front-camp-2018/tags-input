@@ -7,9 +7,9 @@ const tagsArr = ['1', 'super tag'];
 $tagsInput.addEventListener('keyup', ({key, target}) => {
   if (key === 'Enter' && target.value.trim()) {
     const $el = createTagElement(target.value);
-    const isElementExist = tagsArr.includes(target.value);
+    const elementExists = tagsArr.includes(target.value);
 
-    if (!isElementExist) {
+    if (!elementExists) {
       $tagsList.appendChild($el);
       tagsArr.push(target.value);
       target.value = '';
@@ -20,8 +20,8 @@ $tagsInput.addEventListener('keyup', ({key, target}) => {
 $tagsList.addEventListener('click', event => {
   const {target} = event;
   const isRemoveBtn = target.classList.contains('remove-btn');
-  const $foo = target.parentElement.parentElement;
   const $tag = target.parentElement;
+  const $foo = $tag.parentElement;
   const tagContent = $tag.getElementsByClassName('tag-name')[0];
   const tagInnerText = tagContent.innerText;
 
