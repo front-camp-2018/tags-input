@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tags Input</title>
   <link rel="stylesheet" href="./src/index.css">
@@ -12,8 +11,20 @@
   <main id="app">
     <h1 class="title-level-1">Tags Input App</h1>
     <h2 class="title-level-2">Simple Input</h2>
-    <input id="tags-input" type="text" placeholder="type your tags..." />
-    <ul id="tags-list"></ul>
+    <p id="warning-message-1" hidden="true">You have such tag</p>
+    </div>
+    <div>
+      <input id="tags-input-1" type="text" maxlength="21" placeholder="type your tags..." />
+      <button id="button-1" hidden="true">Sort Tags</button>
+    </div>
+    <ul id="tags-list-1"></ul>
+    <h2 class="title-level-2">Input with default tags:</h2>
+    <div>
+      <input id="tags-input-2" type="text" maxlength="21" autofocus placeholder="type your tags..." />
+      <button id="button-2" hidden="true">Sort Tags</button>
+    </div>
+    <ul id="tags-list-2"></ul>
+    <div id="warning">You have such tag !</div>
   </main>
   <script src="src/index.js"></script>
 </body>
