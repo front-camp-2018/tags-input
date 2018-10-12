@@ -1,23 +1,40 @@
 'use strict';
 
 const $tagsInput = document.getElementById('tags-input');
-const $tagsList = document.getElementById('tags-list');
+const $tagsDefaultInput = document.getElementById('tags-input-2');
+const $tagsList = document.getElementsByTagName('ul');
 const tagsArr = ['1', 'super tag'];
+
 
 $tagsInput.addEventListener('keyup', ({key, target}) => {
   if (key === 'Enter' && target.value.trim()) {
     const $el = createTagElement(target.value);
     const isElementExist = tagsArr.includes(target.value);
-
+    const listNumb = target.getAttribute('numb');
+      
     if (!isElementExist) {
-      $tagsList.appendChild($el);
+      $tagsList[listNumb].appendChild($el);
       tagsArr.push(target.value);
       target.value = '';
     }
   }
 });
 
-$tagsList.addEventListener('click', event => {
+$tagsDefaultInput.addEventListener('keyup', ({key, target}) => {
+  if (key === 'Enter' && target.value.trim()) {
+    const $el = createTagElement(target.value);
+    const isElementExist = tagsArr.includes(target.value);
+    const listNumb = target.getAttribute('numb');
+      
+    if (!isElementExist) {
+      $tagsList[listNumb].appendChild($el);
+      tagsArr.push(target.value);
+      target.value = '';
+    }
+  }
+});
+
+$tagsList[0].addEventListener('click', event => {
   const {target} = event;
   const isRemoveBtn = target.classList.contains('remove-btn');
   const $foo = target.parentElement.parentElement;
@@ -25,12 +42,21 @@ $tagsList.addEventListener('click', event => {
 
   if (isRemoveBtn) {
     $foo.removeChild($tag);
-
-    // TODO: remove element from array
-    // tagsArr.splice();
+    tagsArr.splice(tagsArr.indexOf($tag.children[0].innerText));;
   }
 });
 
+$tagsList[1].addEventListener('click', event => {
+  const {target} = event;
+  const isRemoveBtn = target.classList.contains('remove-btn');
+  const $foo = target.parentElement.parentElement;
+  const $tag = target.parentElement;
+
+  if (isRemoveBtn) {
+    $foo.removeChild($tag);
+    tagsArr.splice(tagsArr.indexOf($tag.children[0].innerText));
+  }
+});
 const createTagElement = content => {
   const $li = document.createElement('li');
 
@@ -39,7 +65,6 @@ const createTagElement = content => {
     <span class="tag-name">${content}</span>
     <span class="remove-btn">x</span>
   `;
-
   return $li;
 };
 
@@ -47,7 +72,7 @@ const init = () => {
   tagsArr.forEach(tagValue => {
     const $el = createTagElement(tagValue);
 
-    $tagsList.appendChild($el);
+    $tagsList[1].appendChild($el);
   });
 };
 
