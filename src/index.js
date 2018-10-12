@@ -3,6 +3,8 @@
 const $app = document.getElementById('app');
 const $tagsInput = document.getElementById('tags-input');
 const $tagsList = document.getElementById('tags-list');
+const $tagsInput2 = document.getElementById('tags-input2');
+const $tagsList2 = document.getElementById('tags-list2');
 const tagsArr = ['1', 'super tag'];
 
 $tagsInput.addEventListener('keyup', ({key, target}) => {
@@ -12,6 +14,19 @@ $tagsInput.addEventListener('keyup', ({key, target}) => {
 
     if (!isElementExist) {
       $tagsList.appendChild($el);
+      tagsArr.push(target.value);
+      target.value = '';
+    }
+  }
+});
+
+$tagsInput2.addEventListener('keyup', ({key, target}) => {
+  if (key === 'Enter' && target.value.trim()) {
+    const $el = createTagElement(target.value);
+    const isElementExist = tagsArr.includes(target.value);
+
+    if (!isElementExist) {
+      $tagsList2.appendChild($el);
       tagsArr.push(target.value);
       target.value = '';
     }
@@ -45,7 +60,7 @@ const init = () => {
   tagsArr.forEach(tagValue => {
     const $el = createTagElement(tagValue);
 
-    $tagsList.appendChild($el);
+    $tagsList2.appendChild($el);
   });
 };
 
@@ -58,8 +73,8 @@ const rmBtn = document.createElement("input");
       $app.append(rmBtn);
 
       rmBtn.addEventListener('click', event => {
-        while($tagsList.firstChild) {
-          $tagsList.removeChild($tagsList.firstChild);
+        while($tagsList2.firstChild) {
+          $tagsList2.removeChild($tagsList2.firstChild);
         }
       });
 
