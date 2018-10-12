@@ -22,12 +22,12 @@ $tagsList.addEventListener('click', event => {
   const isRemoveBtn = target.classList.contains('remove-btn');
   const $foo = target.parentElement.parentElement;
   const $tag = target.parentElement;
+  const tagContent = $tag.getElementsByClassName('tag-name')[0];
+  const tagInnerText = tagContent.innerText;
 
   if (isRemoveBtn) {
     $foo.removeChild($tag);
-
-    // TODO: remove element from array
-    // tagsArr.splice();
+    tagsArr.splice(tagsArr.findIndex(e => e === tagInnerText));
   }
 });
 
