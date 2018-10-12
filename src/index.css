@@ -31,14 +31,16 @@ ul {
   margin-bottom: 15px;
 }
 
-#tags-input {
+#tags-input,
+.tags-input {
   height: 40px;
   font-size: 24px;
   padding: 0 10px;
   margin-bottom: 20px;
 }
 
-#tags-list {
+#tags-list,
+.tags-list {
   list-style: none;
   display: flex;
   align-items: center;
@@ -66,4 +68,30 @@ ul {
   padding-left: 8px;
   border-left: 1px solid #363d48;
   cursor: pointer;
+}
+
+.remove-btn:hover {
+  color: red;
+}
+
+.cont {
+  display: flex;
+  flex-direction: row;
+}
+
+.option-btn {
+  height: 44px;
+}
+
+.hint{
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgba(128, 128, 128, 0.5);
+  width: 200px;
+  height: 100px;
+  visibility: hidden;
 }
