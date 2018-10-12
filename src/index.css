@@ -16,7 +16,7 @@ ul {
 #app {
   height: 100%;
   background: #2d353c;
-  color: white;
+  color: rgb(216, 216, 216);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@ ul {
 }
 
 .title-level-1 {
-  margin-bottom: 25px;
+  margin-bottom: 55px;
 }
 
 .title-level-2 {
@@ -34,11 +34,17 @@ ul {
 #tags-input {
   height: 40px;
   font-size: 24px;
-  padding: 0 10px;
-  margin-bottom: 20px;
+  padding: 0 5px;
+  margin-bottom: 15px;
+}
+#tags-input-2{
+  height: 40px;
+  font-size: 24px;
+  padding: 0 5px;
+  margin-bottom: 15px;
 }
 
-#tags-list {
+#tags-list ,#tags-list-2  {
   list-style: none;
   display: flex;
   align-items: center;
