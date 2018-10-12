@@ -1,5 +1,6 @@
 'use strict';
 
+const $app = document.getElementById('app');
 const $tagsInput = document.getElementById('tags-input');
 const $tagsList = document.getElementById('tags-list');
 const tagsArr = ['1', 'super tag'];
@@ -25,9 +26,6 @@ $tagsList.addEventListener('click', event => {
 
   if (isRemoveBtn) {
     $foo.removeChild($tag);
-
-    // TODO: remove element from array
-    // tagsArr.splice();
   }
 });
 
@@ -50,5 +48,20 @@ const init = () => {
     $tagsList.appendChild($el);
   });
 };
+
+const rmBtn = document.createElement("input");
+      rmBtn.className = "removeButton";
+      rmBtn.type = "submit";
+      rmBtn.innerHTML = "Delete all";
+      rmBtn.value = "Delete elements";
+
+      $app.append(rmBtn);
+
+      rmBtn.addEventListener('click', event => {
+        while($tagsList.firstChild) {
+          $tagsList.removeChild($tagsList.firstChild);
+        }
+      });
+
 
 init();
