@@ -4,6 +4,8 @@ body {
   min-height: 100%;
   padding: 0;
   margin: 0;
+  font-family: sans-serif;
+  word-break: break-word;
 }
 
 h1,
@@ -47,9 +49,8 @@ ul {
 }
 
 .tags-list-item {
-  height: 30px;
   display: flex;
-  padding: 0 8px;
+  padding: 5px 10px;
   margin: 10px;
   align-items: center;
   background: #5c656e;
@@ -58,7 +59,7 @@ ul {
 }
 
 .tag-name {
-  padding: 0 5px;
+  padding-right: 8px;
 }
 
 .remove-btn {
