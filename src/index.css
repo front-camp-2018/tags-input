@@ -16,7 +16,7 @@ ul {
 #app {
   height: 100%;
   background: #2d353c;
-  color: white;
+  color: #edeeef;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,22 +24,35 @@ ul {
 }
 
 .title-level-1 {
-  margin-bottom: 25px;
+  margin-bottom: 17px;
 }
 
 .title-level-2 {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  margin-top: 30px;
 }
 
-#tags-input {
+.tags-input {
   height: 40px;
   font-size: 24px;
-  padding: 0 10px;
-  margin-bottom: 20px;
+  padding: 0 5px;
+  margin-bottom: 17px;
 }
 
-#tags-list {
+.error-massage {
+  display: none;
+  clear: both;
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.2em;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-top: -10px;
+}
+
+.tags-list {
   list-style: none;
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,8 +62,7 @@ ul {
 .tags-list-item {
   height: 30px;
   display: flex;
-  padding: 0 8px;
-  margin: 10px;
+  margin: 6px 4px;
   align-items: center;
   background: #5c656e;
   color: white;
@@ -63,7 +75,7 @@ ul {
 
 .remove-btn {
   color: #cedff2;
-  padding-left: 8px;
+  padding: 0 5px;
   border-left: 1px solid #363d48;
   cursor: pointer;
 }
