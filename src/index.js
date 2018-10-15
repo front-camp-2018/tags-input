@@ -6,6 +6,7 @@ const $defaultTagsInput = document.getElementById('default-tags-input');
 const $defaultTagsList = document.getElementById('default-tags-list');
 const defaultTagsArr = ['1', 'super tag'];
 const tagsArr = [];
+const sec = 3000;
 
 function createTag({ key, target }, arr, tagList) {
   if (key === 'Enter' && target.value.trim()) {
@@ -19,7 +20,7 @@ function createTag({ key, target }, arr, tagList) {
     } else {
       const $snackBar = document.getElementById('snackbar');
       $snackBar.className = 'show';
-      setTimeout(() => { $snackBar.className = $snackBar.className.replace('show', ''); }, 3000);
+      setTimeout(() => { $snackBar.className = $snackBar.classList.remove('show'); }, sec);
     }
   }
 }
@@ -38,15 +39,11 @@ function removeTag(event, arr) {
   }
 }
 
-$defaultTagsInput.addEventListener('keyup',
-  () => createTag(event, defaultTagsArr, $defaultTagsList));
-$defaultTagsList.addEventListener('click',
-  () => removeTag(event, defaultTagsArr));
+$defaultTagsInput.addEventListener('keyup', () => createTag(event, defaultTagsArr, $defaultTagsList));
+$defaultTagsList.addEventListener('click', () => removeTag(event, defaultTagsArr));
 
-$simpleTagsInput.addEventListener('keyup',
-  () => createTag(event, tagsArr, $simpleTagsList));
-$simpleTagsList.addEventListener('click',
-  () => removeTag(event, tagsArr));
+$simpleTagsInput.addEventListener('keyup', () => createTag(event, tagsArr, $simpleTagsList));
+$simpleTagsList.addEventListener('click', () => removeTag(event, tagsArr));
 
 const createTagElement = content => {
   const $li = document.createElement('li');
