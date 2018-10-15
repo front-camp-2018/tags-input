@@ -1,54 +1,87 @@
 'use strict';
 
-const $tagsInput = document.getElementById('tags-input');
-const $tagsList = document.getElementById('tags-list');
-const tagsArr = ['1', 'super tag'];
+class TagsInput {
+  constructor(id, defaultTagsArr = []) {
+    this.$tagsInput = document.getElementById(id);
+    this.$tagsList = document.getElementById(id).nextElementSibling;
+    this.defaultTagsArr = defaultTagsArr;
 
-$tagsInput.addEventListener('keyup', ({key, target}) => {
-  if (key === 'Enter' && target.value.trim()) {
-    const $el = createTagElement(target.value);
-    const isElementExist = tagsArr.includes(target.value);
+    this.attachListeners();
+    this.initDefaultList();
+    this.divError = this.createDivError();
+  }
 
-    if (!isElementExist) {
-      $tagsList.appendChild($el);
-      tagsArr.push(target.value);
-      target.value = '';
+  static createTagElement(content) {
+    const $li = document.createElement('li');
+
+    $li.className = 'tags-list-item';
+    $li.innerHTML = `
+      <span class="tag-name">${content}</span>
+      <span class="remove-btn">x</span>
+    `;
+
+    return $li;
+  }
+
+  createDivError() {
+    const $div = document.createElement('div');
+    $div.textContent = 'This value is already in the list!';
+    $div.style.visibility = 'hidden';
+    $div.style.color = 'red';
+    $div.style.marginBottom = '3px';
+    this.$tagsInput.parentElement.insertBefore($div, this.$tagsInput);
+
+    return $div;
+  }
+
+  attachListeners() {
+    this.$tagsInput.addEventListener('keyup', e => this.onKeyUp(e));
+    this.$tagsList.addEventListener('click', e => this.onClick(e));
+  }
+
+  onClick({target}) {
+    const isRemoveBtn = target.classList.contains('remove-btn');
+
+    if (isRemoveBtn) {
+      const $tag = target.parentElement;
+      const tagIndex = Array.prototype.indexOf.call(this.$tagsList.children, $tag);
+
+      if (parseInt(this.$tagsInput.value) === parseInt(this.defaultTagsArr[tagIndex])) {
+        this.divError.style.visibility = 'hidden';
+      }
+
+      this.$tagsList.removeChild($tag);
+
+      // TODO: remove element from array
+      this.defaultTagsArr.splice(tagIndex, 1);
     }
   }
-});
 
-$tagsList.addEventListener('click', event => {
-  const {target} = event;
-  const isRemoveBtn = target.classList.contains('remove-btn');
-  const $foo = target.parentElement.parentElement;
-  const $tag = target.parentElement;
+  onKeyUp({key, target}) {
+    if (!this.defaultTagsArr.includes(target.value.trim())) {
+      this.divError.style.visibility = 'hidden';
 
-  if (isRemoveBtn) {
-    $foo.removeChild($tag);
+      if (key === 'Enter') {
+        const $el = TagsInput.createTagElement(target.value);
+        this.$tagsList.appendChild($el);
+        this.defaultTagsArr.push(target.value);
 
-    // TODO: remove element from array
-    // tagsArr.splice();
+        target.value = '';
+      }
+    } else {
+      this.divError.style.visibility = 'visible';
+    }
   }
-});
 
-const createTagElement = content => {
-  const $li = document.createElement('li');
+  initDefaultList() {
+    this.defaultTagsArr.forEach(tagValue => {
+      const $li = TagsInput.createTagElement(tagValue);
+      this.$tagsList.appendChild($li);
+    });
+  }
+}
 
-  $li.className = 'tags-list-item';
-  $li.innerHTML = `
-    <span class="tag-name">${content}</span>
-    <span class="remove-btn">x</span>
-  `;
+new TagsInput('tags-input', []);
+new TagsInput('default-tags-input', ['1', '2']);
 
-  return $li;
-};
 
-const init = () => {
-  tagsArr.forEach(tagValue => {
-    const $el = createTagElement(tagValue);
-
-    $tagsList.appendChild($el);
-  });
-};
-
-init();
