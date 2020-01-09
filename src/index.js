@@ -1,7 +1,6 @@
 'use strict';
 
 const $tagsInputs = document.getElementsByClassName('tags-input');
-
 const $tagsLists = document.getElementsByClassName('tags-list');
 const $errorList = document.getElementsByClassName('error-message');
 const tagsArrs = [[], ['1', 'super tag']];        // you may change default tags here
